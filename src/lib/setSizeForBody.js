@@ -1,16 +1,16 @@
 export const setSizeForBody = (item) => {
-    const windowSize = {
-        width: window.innerWidth,
-        height: window.innerHeight
-    };
+  const windowSize = {
+    width: window.innerWidth,
+    height: window.innerHeight,
+  };
 
-    let elemScale = windowSize.width / item.width;
-    if ( elemScale * item.height >= windowSize.height ) elemScale = windowSize.height / item.height;
+  let elemScale = windowSize.width / item.width;
+  if (elemScale * item.height >= windowSize.height) elemScale = windowSize.height / item.height;
 
-    let { elem } = item;
-    let { body } = document;
+  const { elem } = item;
+  const { body } = document;
 
-    elem.style.transform = 'scale('+elemScale+')';
-    body.style.width = windowSize.width + 'px';
-    body.style.height = windowSize.height + 'px';
+  elem.style.transform = `scale(${elemScale})`;
+  body.style.width = `${windowSize.width}px`;
+  body.style.height = `${windowSize.height}px`;
 };
