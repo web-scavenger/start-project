@@ -36,15 +36,22 @@ gulp.task('img-to-base64', () => gulp.src('css/style.css')
   }))
   .pipe(gulp.dest('css/img-to-base64')));
 
-gulp.task('inline-build', () => gulp.src('index.html')
-  .pipe(inlinesource())
-  .pipe(gulp.dest('inline_build')));
+gulp.task('inline-build', () => {
+  const options = {
+    compress: true, // if don`t work - change to false
+  };
+
+  return gulp.src('index.html')
+    .pipe(inlinesource(options))
+    .pipe(gulp.dest('inline_build'));
+});
+
 gulp.task('browserSync', () => {
   browserSync({
     server: {
       baseDir: './',
     },
-    port: 8080,
+    // port: 8080,
     open: true,
     notify: false,
   });
