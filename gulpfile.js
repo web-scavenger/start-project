@@ -9,6 +9,8 @@ const browserify = require('browserify');
 const cssBase64 = require('gulp-css-base64');
 const inlinesource = require('gulp-inline-source');
 const browserSync = require('browser-sync');
+const imageDataURI = require('gulp-image-data-uri');
+const concat = require('gulp-concat');
 
 const { reload } = browserSync;
 
@@ -44,6 +46,17 @@ gulp.task('inline-build', () => {
   return gulp.src('index.html')
     .pipe(inlinesource(options))
     .pipe(gulp.dest('inline_build'));
+});
+
+gulp.task('audio-to-base64', () => {
+  gulp.src('./audio/*')
+    .pipe(imageDataURI({
+      template: {
+        file: './tmp/data-uri-template.js',
+      },
+    }))
+    .pipe(concat('audioData.js'))
+    .pipe(gulp.dest('./audio_settings'));
 });
 
 gulp.task('browserSync', () => {

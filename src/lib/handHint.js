@@ -5,20 +5,23 @@ const handHint = {
   opt: {
     item: document.querySelector('#handHint'),
     animation: null,
+    animated: false,
     startTop: '120%',
     startLeft: '120%',
-    duration: 400,
+    duration: 700,
   },
   show({ element }) {
+    const self = this;
     const { opt } = this;
-    if (!element.getAttribute('data-hand')) {
-      element.setAttribute('data-hand', true);
-      const handDOM = opt.item;
-      const positionHand = handDOM.getBoundingClientRect();
+    element.setAttribute('data-hand', true);
+    const handDOM = opt.item;
+    const positionHand = handDOM.getBoundingClientRect();
 
-      const { top, left } = this.getElementPosition(element);
+    const { top, left } = this.getElementPosition(element);
 
+    self.opt.animation = self.animateHand();
 
+    return new Promise((res) => {
       anime({
         targets: handDOM,
         top: [
@@ -31,39 +34,40 @@ const handHint = {
         ],
         opacity: 1,
         complete() {
+          res({ animated: true });
         },
       });
-      this.animation = this.animateHand();
-    }
+    });
   },
 
   hide() {
-    const hand = this.item;
+    const option = this.opt;
+    const hand = option.item;
     hand.style.opacity = '0';
-    hand.style.left = this.opt.startTop;
-    hand.style.top = this.opt.startLeft;
-    anime.remove(this.item);
+    hand.style.left = option.startTop;
+    hand.style.top = option.startLeft;
+    anime.remove(option.animation);
   },
 
   animateHand() {
     //  css animation :
-    // document.getElementById('handHint').setAttribute('data-anime', true);
+    document.getElementById('handHint').setAttribute('data-anime', true);
 
     // anime.js animation :
-    anime({
-      targets: this.opt.item,
-      rotate: [{ value: -30, duration: 0 }],
-      translateX: [
-        { value: 0, duration: 0 },
-        { value: 10, duration: 900, easing: 'easeInOutQuad' },
-      ],
-      translateY: [
-        { value: 0, duration: 0 },
-        { value: 10, duration: 900, easing: 'easeInOutQuad' },
-      ],
-      direction: 'alternate',
-      loop: true,
-    });
+    // anime({
+    //   targets: this.opt.item,
+    //   // rotate: [{ value: -30, duration: 0 }],
+    //   translateX: [
+    //     { value: 0, duration: 0 },
+    //     { value: 10, duration: 900, easing: 'easeInOutQuad' },
+    //   ],
+    //   translateY: [
+    //     { value: 0, duration: 0 },
+    //     { value: 10, duration: 900, easing: 'easeInOutQuad' },
+    //   ],
+    //   direction: 'alternate',
+    //   loop: true,
+    // });
   },
 
   getElementPosition(element) {

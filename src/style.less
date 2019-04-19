@@ -23,8 +23,46 @@ body {
     overflow: hidden;
 }
 
+
+@keyframes animateHand {
+    0% {
+        transform: translate(0px, 0px);
+    }
+
+    50% {
+        transform: translate(10px, 10px);
+    }
+
+    100% {
+        transform: translate(0px, 0px);
+    }
+}
+
 #home {
     width: 100%;
     height: 100%;
 
+}
+
+#handHint {
+    width: 104px;
+    height: 104px;
+    margin-left: -62px;
+    margin-top: -62px;
+
+    top: 120%;
+    left: 120%;
+    z-index: 5;
+    span {
+        width: 100%;
+        height: 100%;
+        background: url('../img/hand_hint.png') no-repeat center;
+        background-size: cover;
+    }
+
+    &[data-anime='true'] {
+        span {
+            animation: animateHand infinite 1s ease-in-out;
+        }
+    }
 }
