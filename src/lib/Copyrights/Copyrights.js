@@ -16,7 +16,7 @@ const Copyrights = ({ brandName, scale }) => {
   const createTextBlock = () => {
     const p = document.createElement('p');
     const year = getYear();
-    p.innerHTML = `Â©${year} ${brand}. All Rights Reserved.`;
+    p.innerHTML = `©${year} ${brand}. All Rights Reserved.`;
     return p;
   };
 
@@ -64,9 +64,14 @@ const Copyrights = ({ brandName, scale }) => {
   const appendBlock = (element) => {
     document.body.appendChild(element);
   };
-
+  
+  const removeOldCopyright = () => {
+    const old = document.querySelector('.copyrights');
+    if(old) old.remove();
+  }
 
   const add = async () => {
+    removeOldCopyright()
     const block = await createCopyrightBlock();
     appendFont();
     appendStyles();
