@@ -24,11 +24,13 @@ export default class Reel {
   spin() {
     const rows = document.querySelectorAll(`.${this.rows}`);
     if (this.spinCounter < this.winCombination.length) {
-      rows.forEach(row => row.style.top = this.stopPositions[this.spinCounter]);
-      const count = this.spinCounter;
-      this.spinCounter++;
-      const willSpin = this.spinCounter < this.winCombination.length;
-      return { count, willSpin };
+      return new Promise((res) => {
+        rows.forEach(row => row.style.top = this.stopPositions[this.spinCounter]);
+        const count = this.spinCounter;
+        this.spinCounter++;
+        const willSpin = this.spinCounter < this.winCombination.length;
+        setTimeout(() => (res({ count, willSpin })), 3000);
+      });
     }
   }
 }

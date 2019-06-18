@@ -20,7 +20,6 @@ const audioPlay = {
           }
         })
           .catch((error) => {
-            console.log(error);
             throw new Error(error);
           });
       }
@@ -36,6 +35,11 @@ const audioPlay = {
   },
   changeModeHandler() {
     this.soundLogo.onclick = () => { this.changeSoundMode(); };
+  },
+  restartSound(name) {
+    this.changeSoundMode();
+    const audio = this.audioDOM.find(element => element.name === name);
+    audio.dataDOM.currentTime = 0;
   },
 };
 

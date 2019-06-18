@@ -1,12 +1,24 @@
-import ResponsiveScale from './lib/ResponsiveScale';
+import { getPageScale, setScaleForItems } from './lib/responsiveScale';
 
 window.onload = () => {
-  const items = [];
-  const scaleItems = new ResponsiveScale({
-    items,
-    psdWidth: 640,
-    ratio: 0.68,
-  });
+  const items = [
+    
+  ];
+  const setScaleForAllItems = (scale) => {
+    setScaleForItems(
+      items,
+      scale,
+    );
+  };
+
+  let scale = getPageScale(640, document.body.clientWidth, document.body.clientHeight);
+  setScaleForAllItems(scale);
+
+
+  window.onresize = () => {
+    scale = getPageScale(640, document.body.clientWidth, document.body.clientHeight);
+    setScaleForAllItems(scale);
+  };
 
   document.body.style.opacity = '1';
 };

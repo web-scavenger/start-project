@@ -2,6 +2,12 @@ import copyrightsData from './copyrightsData';
 import setPrefix from '../setPrefix';
 import copyrightStyle from './copyrightsStyle';
 
+const resizeCopyright = (scaleVal) => {
+  const elem = document.querySelector('.copyrights div');
+  const value = `scale(${scaleVal})`;
+  setPrefix({ elem, propertyCss: 'transform', value });
+};
+
 const Copyrights = ({ brandName, scale }) => {
   const { fontLink, playtikaLogo } = copyrightsData;
   const brand = brandName || 'Playtika Ltd';
@@ -16,7 +22,7 @@ const Copyrights = ({ brandName, scale }) => {
   const createTextBlock = () => {
     const p = document.createElement('p');
     const year = getYear();
-    p.innerHTML = `©${year} ${brand}. All Rights Reserved.`;
+    p.innerHTML = `&#9400;${year} ${brand}. All Rights Reserved.`;
     return p;
   };
 
@@ -65,17 +71,29 @@ const Copyrights = ({ brandName, scale }) => {
     document.body.appendChild(element);
   };
 
+  const removeOldCopyright = () => {
+    const old = document.querySelector('.copyrights');
+    if (old) old.remove();
+  };
 
   const add = async () => {
+    const old = document.querySelector('.copyrights');
+    if (!old) {
+      appendFont();
+      appendStyles();
+    }
+
+    removeOldCopyright();
+
     const block = await createCopyrightBlock();
-    appendFont();
-    appendStyles();
     appendBlock(block);
   };
   add();
 };
 
 export default Copyrights;
+export { resizeCopyright };
+
 
 // ======================= Copyright ============================
 //  gets object {

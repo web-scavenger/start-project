@@ -1,4 +1,4 @@
-import { randomInteger } from '../randomInteger';
+import randomInteger from '../randomInteger';
 
 const generateReelCombinations = (icons, winArray, oneSpinLength, startArr) => {
   const rowsCombination = [];
