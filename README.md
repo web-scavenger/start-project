@@ -4,6 +4,67 @@
 * **inline build** - $ gulp inline-build (PAY ATTENTION: place attribute "inline" on source(script, link, etc.) which you should include in build);
 # Library Documentation #
 
+## Function Copyrights ##
+Works in pair with **function responsiveScale**
+
+brandName => String | default 'Playtika Ltd';
+scale =>  Number | target scale of element | default 1;;
+
+Add **resizeCopyright** on resize listner if you have full responsive playableAd ( for Unity, AppLovin, ironSource)
+
+```
+import { getPageScale, setScaleForItems } from './lib/responsiveScale';
+import Copyrights, { resizeCopyright } from './lib/Copyrights/Copyrights';
+
+let scale = getPageScale(640, document.body.clientWidth, document.body.clientHeight);
+Copyrights({ brandName: 'Playtika UK - House of Fun Limited', scale: scale.tabletScale });
+
+window.onresize = () => {
+    scale = getPageScale(640, document.body.clientWidth, document.body.clientHeight);
+    setScaleForAllItems(scale);
+    resizeCopyright(scale.tabletScale);
+  };
+```
+
+## Add Audio to Playble ##
+
+```
+import * as audioHowler from './audio_controllers/audioHowler';
+
+const startAudioPlay = () => {
+  audioHowler.mainTheme.play();
+  audioHowler.changeSoundMode();
+  audioHowler.changeModeHandler();
+};
+
+```
+
+## Function responsiveScale ## 
+
+```
+import { getPageScale, setScaleForItems } from './lib/responsiveScale';
+  const items = [
+    // DOM element`s id, example:
+    // 'logo', 'UI'
+  ];
+  const setScaleForAllItems = (scale) => {
+    setScaleForItems(
+      items,
+      scale,
+    );
+  };
+
+  let scale = getPageScale(640, document.body.clientWidth, document.body.clientHeight);
+  setScaleForAllItems(scale);
+
+
+
+  window.onresize = () => {
+    scale = getPageScale(640, document.body.clientWidth, document.body.clientHeight);
+    setScaleForAllItems(scale);
+  };
+```
+
 # PLATFORMS: #
 
 ## IronSource ##

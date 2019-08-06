@@ -38,27 +38,37 @@ gulp.task('img-to-base64', () => gulp.src('css/style.css')
   }))
   .pipe(gulp.dest('css/img-to-base64')));
 
-gulp.task('inline-build', () => {
-  const options = {
-    compress: true, // if don`t work - change to false
-  };
-
-  return gulp.src('index.html')
-    .pipe(inlinesource(options))
-    .pipe(gulp.dest('inline_build'));
+gulp.task('video-to-base64', () => {
+  gulp.src('./video/*')
+    .pipe(imageDataURI({
+      template: {
+        file: './tmp/data-uri-template-video.js',
+      },
+    }))
+    .pipe(concat('videoData.js'))
+    .pipe(gulp.dest('./video_settings'));
 });
 
 gulp.task('audio-to-base64', () => {
   gulp.src('./audio/*')
     .pipe(imageDataURI({
       template: {
-        file: './tmp/data-uri-template.js',
+        file: './tmp/data-uri-template-audio.js',
       },
     }))
     .pipe(concat('audioData.js'))
     .pipe(gulp.dest('./audio_settings'));
 });
 
+gulp.task('inline-build', () => {
+  const options = {
+    compress: false, // if don`t work - change to false
+  };
+
+  return gulp.src('index.html')
+    .pipe(inlinesource(options))
+    .pipe(gulp.dest('inline_build'));
+});
 gulp.task('browserSync', () => {
   browserSync({
     server: {
@@ -71,6 +81,6 @@ gulp.task('browserSync', () => {
 });
 
 gulp.task('start', ['es6', 'css', 'browserSync'], () => {
-  gulp.watch('src/**/*.js', ['es6']);
+  gulp.watch(['src/**/*.js', 'video_settings/*.js'], ['es6']);
   gulp.watch('src/style.less', ['css']);
 });

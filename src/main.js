@@ -1,5 +1,7 @@
 import { getPageScale, setScaleForItems } from './lib/responsiveScale';
 
+
+
 window.onload = () => {
   const items = [
     
