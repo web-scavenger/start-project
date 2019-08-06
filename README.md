@@ -55,12 +55,12 @@ const dapiInit = () => {
   window.onerror = function onError(msg, url, line, col, error) { // '*' required
     window.parent.postMessage(`IFRAME ERROR --${error}`, '*');
   };
+```
 
-  ```
-
-  ## Vungle: ##
+## Vungle: ##
 
 * Add handlers:
+
 ```
   const addInstallBtnHandlerVungle = () => {
     btnCTA.addEventListener('click', () => {
@@ -76,7 +76,7 @@ const dapiInit = () => {
   };
 ```
 
-  ## AppLovin: ##
+## AppLovin: ##
 
   * Add code from **getBtnLink** to add link to CTA button
 ```
