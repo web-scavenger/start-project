@@ -54,13 +54,13 @@ import { getPageScale, setScaleForItems } from './lib/responsiveScale';
     );
   };
 
-  let scale = getPageScale(640, document.body.clientWidth, document.body.clientHeight);
+  const home = document.getElementById('home');
+
+  let scale = getPageScale(640, home.clientWidth, home.clientHeight);
   setScaleForAllItems(scale);
 
-
-
   window.onresize = () => {
-    scale = getPageScale(640, document.body.clientWidth, document.body.clientHeight);
+    scale = getPageScale(640, home.clientWidth, home.clientHeight);
     setScaleForAllItems(scale);
   };
 ```
