@@ -26,6 +26,22 @@ window.onresize = () => {
   };
 ```
 
+## Class ToggleElement ##
+use to toggle element at page using data-attr and CSS
+
+selector => String | selector | DOM element;
+timeout =>  Number | animation duration | default 350;
+
+Have 2 methods **show()** and **hide()** that resolve on animation`s end
+
+```
+import ToggleElement from './lib/ToggleElement';
+
+const darkOverlay = new ToggleElement('#darkOverlay');
+await darkOverlay.show()
+await darkOverlay.hide()
+```
+
 ## Add Audio to Playble ##
 
 ```
