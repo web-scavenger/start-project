@@ -65,6 +65,24 @@ import { getPageScale, setScaleForItems } from './lib/responsiveScale';
   };
 ```
 
+## Function getBtnLink ## 
+function uses to add redirect to store (AppStore, Play Market, game web-site) depends of user device
+Add click handler like in code example and change stores links in file './constants/index.js'
+
+```
+import getBtnLink from './lib/getBtnLink';
+  
+  
+const addInstallBtnLink = () => {
+  getBtnLink()
+    .then((link) => {
+      mraid.open(link);
+    });
+};
+
+document.querySelector('#yourCTAButtonId').item.onclick = () => { addInstallBtnLink(); };
+```
+
 # PLATFORMS: #
 
 ## IronSource ##
@@ -146,3 +164,14 @@ const dapiInit = () => {
         mraid.open(link);
       });
 ```
+
+## Unity ##
+
+Add function that starts playable to the unity object and than you can init main unity functions
+
+```
+unity.initPlayable = initPlayable;
+unity.init();
+``` 
+
+* Don`t forget to and click handler that redirect to store ( **getBtnLink**  function)
